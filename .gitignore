@@ -1,0 +1,17 @@
+__pycache__/
+*.py[codz]
+*.so
+*.pyd
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.vscode/
+
+output/
+outputs/
+tmp/
+*.log
+imgui.ini
+weights/

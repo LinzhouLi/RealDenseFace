@@ -1,0 +1,10 @@
+correspondence_weight: 1.0
+relative_depth_weight: 0.0
+expression_regularization: 0.04
+pose_regularization: 0.04
+identity_regularization: 0.04
+damping: 0.1
+pose_damping: 0.1
+registration_iterations: 30
+tracking_iterations: 20
+num_keyframes: 16

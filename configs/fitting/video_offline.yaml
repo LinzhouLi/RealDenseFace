@@ -1,0 +1,7 @@
+correspondence_weight: 1.0
+relative_depth_weight: 2.0
+damping: 0.001
+pose_damping: 0.1
+registration_iterations: 20
+tracking_iterations: 20
+num_keyframes: 32

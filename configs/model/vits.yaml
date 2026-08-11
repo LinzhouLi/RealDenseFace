@@ -1,0 +1,14 @@
+target_size: 512
+dino_encoder: vit_small_plus_patch16_dinov3.lvd1689m
+dino_pretrained: false
+dino_frozen: true
+dpt_feature_dim: 128
+decoder_blocks: 4
+decoder_heads: 6
+dpt_mode: b
+reverse_enc_feats: true
+reverse_dec_feats: true
+add_dec_pe: true
+scale_coord: 1.0
+scale_depth: 8.0
+

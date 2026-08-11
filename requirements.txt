@@ -1,0 +1,16 @@
+# Install a PyTorch build that matches the local CUDA toolkit first:
+# https://pytorch.org/get-started/locally/
+# torch
+numpy
+scipy
+opencv-python
+tqdm
+timm
+roma
+PyYAML
+trimesh
+chumpy
+nvdiffrast @ git+https://github.com/NVlabs/nvdiffrast.git
+
+# Build the local Gauss-Newton solver after installing these dependencies:
+#   pip install -e ./cuda_extensions/flame_solver --no-build-isolation
