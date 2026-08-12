@@ -25,7 +25,17 @@ priors, and fits FLAME using a tailored CUDA Gauss--Newton solver.
 
 This repository provides inference and fitting code for single images, offline
 monocular sequences, online tracking, and a NeRSemble v2 multi-view tracking
-example. Training code is not included.
+example.
+
+## News
+
+- **2026-08-12**: Inference and fitting code with pretrained models released.
+- **2026-08-11**: Paper and project page released.
+
+Coming soon:
+
+- GUI demo
+- Training data
 
 ## Installation
 
@@ -51,12 +61,10 @@ pip install -r requirements.txt
 pip install -e ./cuda_extensions/flame_solver --no-build-isolation
 ```
 
-Pull the released ViT-S and ViT-B checkpoints:
+### Pretrained models
 
-```bash
-git lfs install
-git lfs pull
-```
+Download the released ViT-S and ViT-B checkpoints from
+[Google Drive](TODO) and place them under `weights/`:
 
 ### FLAME model
 
@@ -155,3 +163,16 @@ For each sequence, results are written inside the dataset:
 
 Model architecture configurations are stored under `configs/model/`, while
 task-specific fitting parameters are stored separately under `configs/fitting/`.
+
+## Citation
+
+If you find this work useful, please consider citing:
+
+```bibtex
+@article{li2026realdenseface,
+  title   = {RealDenseFace: Real-time Monocular 3D Face Reconstruction from Dense UV-space Priors},
+  author  = {Li, Linzhou and Shao, Tianjia and Zhou, Kun},
+  journal = {arXiv preprint arXiv:2608.09238},
+  year    = {2026}
+}
+```
