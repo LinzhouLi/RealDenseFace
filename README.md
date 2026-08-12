@@ -64,7 +64,7 @@ pip install -e ./cuda_extensions/flame_solver --no-build-isolation
 ### Pretrained models
 
 Download the released ViT-S and ViT-B checkpoints from
-[Google Drive](TODO) and place them under `weights/`:
+[Google Drive](https://drive.google.com/file/d/1eLlN_BCFMn0jSo0lNwBFqtI6igTh7Nc3/view?usp=sharing) and place them under `weights/`:
 
 ### FLAME model
 
