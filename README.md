@@ -21,7 +21,7 @@
 
 RealDenseFace is a real-time optimization-based framework for monocular FLAME
 reconstruction. It predicts dense UV-space correspondence and relative-depth
-priors, and fits FLAME using a tailored CUDA Gauss--Newton solver.
+priors, and fits FLAME using a tailored CUDA Gauss-Newton solver.
 
 This repository provides inference and fitting code for single images, offline
 monocular sequences, online tracking, and a NeRSemble v2 multi-view tracking
