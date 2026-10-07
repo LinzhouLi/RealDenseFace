@@ -119,7 +119,15 @@ class RealDenseFaceInferencer:
     def _detect_face_bbox(self, image: np.ndarray) -> np.ndarray | None:
         target_h = int(self.facebox_config.input_height)
         target_w = int(self.facebox_config.input_width)
-        resized = cv2.resize(image, (target_w, target_h), interpolation=cv2.INTER_LINEAR)
+        img_h, img_w = image.shape[:2]
+        # Preserve the face proportions and keep the original top-left origin.
+        padded_h = max(img_h, (img_w * target_h + target_w - 1) // target_w)
+        padded_w = max(img_w, (img_h * target_w + target_h - 1) // target_h)
+        padded = cv2.copyMakeBorder(
+            image, 0, padded_h - img_h, 0, padded_w - img_w,
+            cv2.BORDER_CONSTANT, value=0,
+        )
+        resized = cv2.resize(padded, (target_w, target_h), interpolation=cv2.INTER_LINEAR)
         tensor = torch.from_numpy(resized).to(self.face_detector.device, dtype=torch.float32) / 255.0
         tensor = tensor.permute(2, 0, 1).unsqueeze(0).contiguous()
         box, score = self.face_detector.detect_one(tensor)
@@ -127,10 +135,14 @@ class RealDenseFaceInferencer:
             return None
 
         box = np.asarray(box, dtype=np.float32)
-        scale_x = image.shape[1] / float(target_w)
-        scale_y = image.shape[0] / float(target_h)
+        scale_x = padded_w / float(target_w)
+        scale_y = padded_h / float(target_h)
         box[0::2] *= scale_x
         box[1::2] *= scale_y
+        box[0::2] = np.clip(box[0::2], 0.0, float(img_w))
+        box[1::2] = np.clip(box[1::2], 0.0, float(img_h))
+        if box[2] <= box[0] or box[3] <= box[1]:
+            return None
         return box
 
     def _init_face_bbox(self, image: np.ndarray) -> np.ndarray:
