@@ -61,6 +61,9 @@ pip install -r requirements.txt
 pip install -e ./cuda_extensions/flame_solver --no-build-isolation
 ```
 
+If `chumpy` fails to build (newer pip builds it in an isolated environment where its `setup.py` cannot import pip),
+install it first with `pip install chumpy --no-build-isolation`, then rerun the line above.
+
 ### Pretrained models
 
 Download the released ViT-S and ViT-B checkpoints from
