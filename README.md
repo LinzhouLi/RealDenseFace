@@ -13,6 +13,8 @@
   <a href="https://gapszju.github.io/RealDenseFace/">Project Page</a>
   &nbsp;·&nbsp;
   <a href="https://arxiv.org/abs/2608.09238">Paper</a>
+  &nbsp;·&nbsp;
+  <a href="https://huggingface.co/LinzhouLi/RealDenseFace">Dataset</a>
 </p>
 
 <p align="center">
@@ -29,13 +31,14 @@ example.
 
 ## News
 
+- **2026-10-27**: Model weights and training data (Ava256) released on Hugging Face.
 - **2026-08-12**: Inference and fitting code with pretrained models released.
 - **2026-08-11**: Paper and project page released.
 
 Coming soon:
 
 - GUI demo
-- Training data
+- Training data (NPHM and FaceScape)
 
 ## Installation
 
@@ -64,7 +67,7 @@ pip install -e ./cuda_extensions/flame_solver --no-build-isolation
 ### Pretrained models
 
 Download the released ViT-S and ViT-B checkpoints from
-[Google Drive](https://drive.google.com/file/d/1eLlN_BCFMn0jSo0lNwBFqtI6igTh7Nc3/view?usp=sharing) and place them under `weights/`:
+[Google Drive](https://drive.google.com/file/d/1eLlN_BCFMn0jSo0lNwBFqtI6igTh7Nc3/view?usp=sharing) or [Hugging Face](https://huggingface.co/LinzhouLi/RealDenseFace) and place them under `weights/`:
 
 ### FLAME model
 
