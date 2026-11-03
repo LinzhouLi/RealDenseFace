@@ -65,7 +65,7 @@ class FaceDetector:
         self.device = torch.device(device)
 
         self.model = FaceBoxes(num_classes=2)
-        self.model.load_state_dict(torch.load(model_path, map_location=self.device))
+        self.model.load_state_dict(torch.load(model_path, map_location="cpu"))
         self.model.to(self.device)
         self.model.eval()
         if half:
@@ -73,8 +73,9 @@ class FaceDetector:
 
         self.box_scale = np.array([image_size[1], image_size[0], image_size[1], image_size[0]], dtype=np.float32)
         self.image_mean = torch.tensor([104, 117, 123], dtype=self.dtype, device=self.device).view(1, 3, 1, 1)
-        self.priors = PriorBox(image_size).forward().to(dtype=self.dtype, device=self.device)
-        self.priors_cpu = self.priors.float().cpu().numpy()
+        priors_cpu = PriorBox(image_size).forward()
+        self.priors_cpu = priors_cpu.to(dtype=self.dtype).float().numpy()
+        self.priors = priors_cpu.to(dtype=self.dtype, device=self.device)
         if compile_model and hasattr(torch, "compile"):
             self._compile()
 

@@ -190,6 +190,35 @@ __global__ void AssembleIdenRegJacobianCuda(
     }
 }
 
+void LaunchExpPoseRegJacobian(
+    const int num_expressions,
+    const bool calc_jacobian,
+    const int batch_size,
+    const int num_offsets,
+    const int num_residuals,
+    const float* unknows,
+    const float exp_reg_weight,
+    const float pose_reg_weight,
+    float* residual,
+    float* jacobian
+) {
+    const int num_reg_items = num_expressions + (NUM_FLAME_JOINTS - 1) * 3;
+    dim3 block(256, 1, 1);
+    dim3 grid(batch_size, 1, (num_reg_items + block.x - 1) / block.x);
+    switch (num_expressions) {
+#define LAUNCH_REG_CASE(N_EXPR) \
+        case N_EXPR: \
+            AssembleExpPoseRegJacobianCuda<N_EXPR><<<grid, block>>>( \
+                calc_jacobian, batch_size, num_offsets, num_residuals, unknows, \
+                exp_reg_weight, pose_reg_weight, residual, jacobian); \
+            break;
+        FLAME_FOREACH_NEXPR(LAUNCH_REG_CASE)
+#undef LAUNCH_REG_CASE
+        default:
+            throw std::runtime_error("Unsupported expression count in regularization launcher");
+    }
+}
+
 }  // namespace AssembleJacobian
 
 

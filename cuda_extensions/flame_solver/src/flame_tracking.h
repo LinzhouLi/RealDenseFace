@@ -8,8 +8,10 @@
 #include <glm/glm.hpp>
 
 namespace AssembleJacobian {
-    template<int N_EXPR>
-    __global__ void AssembleExpPoseRegJacobianCuda(
+    // Host launcher keeps templated CUDA kernel stubs in their defining TU.
+    // CUDA 13 gives these stubs internal linkage by default.
+    void LaunchExpPoseRegJacobian(
+        const int num_expressions,
         const bool calc_jacobian,
         const int batch_size,
         const int num_offsets,

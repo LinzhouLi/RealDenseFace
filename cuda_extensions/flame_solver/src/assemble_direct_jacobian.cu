@@ -134,9 +134,8 @@ static void launch_assemble_x_direct_jacobian_impl(
         jacobian
     );
 
-    dim3 block_b(256, 1, 1);
-    dim3 grid_b(batch_size, 1, (reg_residuals + block_b.x - 1) / block_b.x);
-    AssembleJacobian::AssembleExpPoseRegJacobianCuda<N_EXPR><<<grid_b, block_b>>>(
+    AssembleJacobian::LaunchExpPoseRegJacobian(
+        N_EXPR,
         true,
         batch_size,
         num_items * 3,

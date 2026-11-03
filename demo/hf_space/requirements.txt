@@ -1,0 +1,14 @@
+torch==2.11.0
+torchvision==0.26.0
+timm==1.0.26
+numpy<2.4
+scipy
+opencv-python-headless
+tqdm
+roma
+PyYAML
+trimesh
+ninja
+setuptools<82
+wheel
+https://huggingface.co/datasets/multimodalart/zerogpu-blackwell-wheels/resolve/main/wheels/pt211-cu130-cp312/nvdiffrast-0.4.0-cp312-cp312-linux_x86_64.whl

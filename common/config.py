@@ -34,6 +34,7 @@ class RealDenseFaceInferenceConfig:
     device: str = "cuda"
     enlarge_bbox_ratio: float = 1.3
     compile_model: bool = True
+    defer_native_context: bool = False
     output_type: str = "numpy"
     filter_out_of_bounds_vertices: bool = False
     filter_occluded_vertices: bool = False

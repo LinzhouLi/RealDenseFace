@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://gapszju.github.io/RealDenseFace/">Project Page</a>
-  &nbsp;·&nbsp;
-  <a href="https://arxiv.org/abs/2608.09238">Paper</a>
-  &nbsp;·&nbsp;
-  <a href="https://huggingface.co/LinzhouLi/RealDenseFace">Dataset</a>
+  <a href="https://gapszju.github.io/RealDenseFace/"><img src="https://img.shields.io/badge/Project_Page-RealDenseFace-green" alt="Project Page"></a>
+  <a href="https://arxiv.org/abs/2608.09238"><img src="https://img.shields.io/badge/arXiv-2608.09238-red" alt="Paper"></a>
+  <a href="https://huggingface.co/spaces/LinzhouLi/RealDenseFace"><img src="https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Demo-blue" alt="Hugging Face Demo"></a>
+  <a href="https://huggingface.co/LinzhouLi/RealDenseFace"><img src="https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Models-yellow" alt="Hugging Face Models"></a>
+  <a href="https://huggingface.co/datasets/LinzhouLi/RealDenseFace-Ava256"><img src="https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-Dataset-orange" alt="Hugging Face Dataset"></a>
 </p>
 
 <p align="center">
@@ -31,14 +31,10 @@ example.
 
 ## News
 
+- **2026-11-03**: Hugging Face Demo released.
 - **2026-10-27**: Model weights and training data (Ava256) released on Hugging Face.
 - **2026-08-12**: Inference and fitting code with pretrained models released.
 - **2026-08-11**: Paper and project page released.
-
-Coming soon:
-
-- GUI demo
-- Training data (NPHM and FaceScape)
 
 ## Installation
 

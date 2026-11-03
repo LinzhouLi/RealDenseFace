@@ -43,8 +43,8 @@ class RealDenseFaceInferencer:
         self.scale_depth = self.model_config.get("scale_depth", 1.0)
 
         self.model = RealDenseFace(**self.model_config)
+        self.model.load_state_dict(torch.load(config.model_weights_path, map_location="cpu"))
         self.model.to(self.device)
-        self.model.load_state_dict(torch.load(config.model_weights_path, map_location=self.device))
         self.model.eval()
         self.model.build_inference_cache()
 
@@ -56,13 +56,13 @@ class RealDenseFaceInferencer:
         self.flame_vertex_uv = torch.from_numpy(flame_assets["vertex_uvs"]).to(self.device).unsqueeze(0).unsqueeze(2) * 2.0 - 1.0
         self.key_vertex_ids = torch.from_numpy(self.vis_edges).to(dtype=torch.int64, device=self.device).flatten().unique()
         self.faces_int32 = torch.from_numpy(np.asarray(flame_assets["faces"], dtype=np.int32)).to(dtype=torch.int32, device=self.device).contiguous()
-        self.visibility_glctx = dr.RasterizeCudaContext()
+        self.visibility_glctx = None if config.defer_native_context else dr.RasterizeCudaContext()
 
         self.facebox_config = FaceBoxConfig() if facebox_config is None else facebox_config
         self.face_detector = self._create_face_detector()
 
         self._input_tensor = torch.empty((self.target_size, self.target_size, 3), dtype=torch.uint8)
-        if self.device.type == "cuda":
+        if self.device.type == "cuda" and not config.defer_native_context:
             self._input_tensor = self._input_tensor.pin_memory()
         self._input_array = self._input_tensor.numpy()
 
@@ -77,6 +77,7 @@ class RealDenseFaceInferencer:
             threshold=float(config.score_threshold),
             half=bool(config.half),
             device=config.device,
+            compile_model=bool(self.config.compile_model),
         )
 
     def _compile(self) -> None:
@@ -274,6 +275,8 @@ class RealDenseFaceInferencer:
         vertex_coord: torch.Tensor,
         vertex_depth: torch.Tensor,
     ) -> torch.Tensor:
+        if self.visibility_glctx is None:
+            self.visibility_glctx = dr.RasterizeCudaContext()
         depth_min = torch.min(vertex_depth)
         depth_max = torch.max(vertex_depth)
         depth_order = (vertex_depth - depth_min) / (depth_max - depth_min)
